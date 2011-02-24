@@ -49,6 +49,7 @@
     </li>
     <li><strong>module <code>S.Middleware</code></strong>
       <ul>
+        <li><a href="middleware.html#aws">Auth.AWS</a></li>
         <li><a href="middleware.html#basic">Auth.Basic</a></li>
         <li><a href="middleware.html#oauth">Auth.OAuth</a></li>
         <li><a href="middleware.html#json">Format.JSON</a></li>
@@ -88,6 +89,29 @@ function m:call (req)
 end
 
 return m
+</pre>
+
+<h2><a name="aws"></a>Spore.Middleware.Auth.AWS</h2>
+
+<p>This middleware implements the authentication from Amazon Web Services,
+see this <a href="http://docs.amazonwebservices.com/AmazonS3/latest/dev/index.html?RESTAuthentication.html">ref doc</a>.</p>
+
+<p>This middleware requires <a href="http://luacrypto.luaforge.net/">luacrypto</a>.</p>
+
+<p>This middleware should be loaded as the last middleware,
+because it directly sends the request.</p>
+
+<pre class="example">
+local client = require 'Spore'.new_from_spec('amazons3.json', {
+    base_url = 'http://s3-eu-west-1.amazonaws.com',  -- the default is http://s3.amazonaws.com
+})
+client:enable('Parameter.Default', {
+    bucket = 'mybucket',
+})
+client:enable('Auth.AWS', {
+    aws_access_key = '0PN5J17HBGZHT7JJ3X82',
+    aws_secret_key = 'uV3F3YluFJax1cknvbcGwgjvx4QpvB+leU8dUj2o',
+})
 </pre>
 
 <h2><a name="basic"></a>Spore.Middleware.Auth.Basic</h2>

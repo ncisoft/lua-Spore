@@ -8,7 +8,7 @@
   <meta http-equiv="Author" content="Fran&ccedil;ois Perrad"/>
   <meta http-equiv="Language" content="en"/>
   <meta http-equiv="Description" content="Module Spore"/>
-  <meta http-equiv="Keywords" content="lua, Spore, ReST, ReSTapi, ReSTful, new_from_spec, new_from_string, enable, enable_if, reset_middlewares, methname_modifier"/>
+  <meta http-equiv="Keywords" content="lua, Spore, ReST, ReSTapi, ReSTful, new_from_spec, new_from_string, enable, enable_if, reset_middlewares, methname_modifier, oauth"/>
 </head>
 
 <body>
@@ -392,6 +392,61 @@ print("artist", r.body.artist)
 for k, v in pairs(r.body._attachments) do
     print(k)
     for kk, vv in pairs(v) do print(kk, vv) end
+end
+</pre>
+
+<h3>with Google &amp; OAuth 1.0</h3>
+
+<p>This example uses the service Google URL Shortener.</p>
+
+<pre class="example">
+local url = require 'socket.url'
+local Spore = require 'Spore'
+--Spore.debug = io.stdout
+
+local function get_google_keys (scope, keys)
+    local oauth = require 'Spore'.new_from_spec 'https://github.com/SPORE/api-description/raw/master/services/googleoauth.json'
+    oauth:enable('Auth.OAuth', keys)
+    local r1 = oauth:get_request_token{
+        scope = scope,
+    }
+    print("request", r1.body)
+    for k, v in r1.body:gmatch'([^&=]+)=([^&=]*)&?' do keys[k] = url.unescape(v) end
+
+    local r2 = oauth:authorize_token{ oauth_token = keys.oauth_token }
+    print("authorize", r2.status, r2.headers.location)
+
+    os.execute("x-www-browser " .. r2.headers.location)
+
+    print "enter oauth_verifier:"
+    local input = io.stdin:read('*l')
+    print("oauth_verifier=]" .. input .. "[")
+    keys.oauth_verifier = input
+
+    local r3 = oauth:get_access_token()
+    print("access", r3.body)
+    for k, v in r3.body:gmatch'([^&=]+)=([^&=]*)&?' do keys[k] = url.unescape(v) end
+
+    keys.oauth_callback_confirmed = nil
+    keys.oauth_verifier = nil
+    return keys
+end
+
+
+local client = require 'Spore'.new_from_spec 'https://github.com/SPORE/api-description/raw/master/services/googleshortener.json'
+client:enable 'Format.JSON'
+client:enable('Auth.OAuth', get_google_keys('https://www.googleapis.com/auth/urlshortener', {
+    oauth_consumer_key    = '000000000000.apps.googleusercontent.com',
+    oauth_consumer_secret = 'XXXXXXXXXXXXXXXXXXXXXXXX',
+}))
+
+local r = client:insert{ payload = { longUrl = 'http://www.google.com/' } }
+print(r.body.id, r.body.longUrl)
+
+local r = client:list()
+print "\nAUTHORIZED\n"
+for k, v in pairs(r.body) do
+    print(k, v)
 end
 </pre>
 

@@ -51,6 +51,7 @@
       <ul>
         <li><a href="middleware.html#aws">Auth.AWS</a></li>
         <li><a href="middleware.html#basic">Auth.Basic</a></li>
+        <li><a href="middleware.html#bearer">Auth.Bearer</a></li>
         <li><a href="middleware.html#oauth">Auth.OAuth</a></li>
         <li><a href="middleware.html#json">Format.JSON</a></li>
         <li><a href="middleware.html#xml">Format.XML</a></li>
@@ -120,6 +121,14 @@ client:enable('Auth.AWS', {
 client:enable('Auth.Basic', {
     username = 'schacon/token',
     password = '6ef8395fecf207165f1a82178ae1b984',
+})
+</pre>
+
+<h2><a name="bearer"></a>Spore.Middleware.Auth.Bearer</h2>
+
+<pre class="example">
+client:enable('Auth.Bearer', {
+    bearer_token = 'vF9dft4qmT',
 })
 </pre>
 

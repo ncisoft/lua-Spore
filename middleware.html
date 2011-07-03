@@ -166,9 +166,9 @@ client:enable 'Format.JSON'
 
 <h2><a name="xml"></a>Spore.Middleware.Format.XML</h2>
 
-<p>This middleware requires <a href="http://www.keplerproject.org/luaexpat/">LuaExpat</a>.</p>
-
 <p>This middleware encodes the parameter <code>payload</code> and decodes the body of the response.</p>
+
+<p>This middleware requires <a href="http://www.keplerproject.org/luaexpat/">LuaExpat</a>.</p>
 
 <pre class="example">
 client:enable 'Format.XML'
@@ -210,6 +210,8 @@ client:enable 'Format.YAML'
 
 <h2><a name="default"></a>Spore.Middleware.Parameter.Default</h2>
 
+<p>This middleware set some parameters with default value.</p>
+
 <pre class="example">
 client:enable('Parameter.Default', {
     state = 'open',
@@ -219,6 +221,8 @@ client:enable('Parameter.Default', {
 
 <h2><a name="force"></a>Spore.Middleware.Parameter.Force</h2>
 
+<p>This middleware forces some parameters.</p>
+
 <pre class="example">
 client:enable('Parameter.Force', {
     format = 'json',
@@ -227,6 +231,8 @@ client:enable('Parameter.Force', {
 </pre>
 
 <h2><a name="proxy"></a>Spore.Middleware.Proxy.Basic</h2>
+
+<p>This middleware handles HTTP proxy.</p>
 
 <pre class="example">
 client:enable('Proxy.Basic', {
@@ -241,6 +247,8 @@ client:enable 'Proxy.Basic'     -- uses HTTP_PROXY=http://john:s3kr3t@proxy.myor
 </pre>
 
 <h2><a name="cache"></a>Spore.Middleware.Cache</h2>
+
+<p>This middleware supplies a local cache (implemented with a weak table).</p>
 
 <pre class="example">
 client:enable 'Cache'
@@ -258,6 +266,8 @@ client:enable 'DoNotTrack'
 
 <h2><a name="logging"></a>Spore.Middleware.Logging</h2>
 
+<p>This middleware registers a logger in <code>env.sporex.logger</code> for use by others middlewares.</p>
+
 <p>This middleware requires <a href="http://www.keplerproject.org/lualogging/">LuaLogging</a>.</p>
 
 <pre class="example">
@@ -269,6 +279,8 @@ client:enable('Logging', {
 </pre>
 
 <h2><a name="mock"></a>Spore.Middleware.Mock</h2>
+
+<p>This middleware allows to register a set of couple (condition, response).</p>
 
 <pre class="example">
 rules = {

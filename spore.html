@@ -413,7 +413,7 @@ local function get_google_keys (scope, keys)
         scope = scope,
     }
     print("request", r1.body)
-    for k, v in r1.body:gmatch'([^&=]+)=([^&=]*)&?' do keys[k] = url.unescape(v) end
+    for k, v in r1.body:gmatch'([^&amp;=]+)=([^&amp;=]*)&amp;?' do keys[k] = url.unescape(v) end
 
     local r2 = oauth:authorize_token{ oauth_token = keys.oauth_token }
     print("authorize", r2.status, r2.headers.location)
@@ -427,7 +427,7 @@ local function get_google_keys (scope, keys)
 
     local r3 = oauth:get_access_token()
     print("access", r3.body)
-    for k, v in r3.body:gmatch'([^&=]+)=([^&=]*)&?' do keys[k] = url.unescape(v) end
+    for k, v in r3.body:gmatch'([^&amp;=]+)=([^&amp;=]*)&amp;?' do keys[k] = url.unescape(v) end
 
     keys.oauth_callback_confirmed = nil
     keys.oauth_verifier = nil

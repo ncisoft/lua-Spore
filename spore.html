@@ -242,7 +242,7 @@ end
 <pre class="example">
 local Spore = require 'Spore'
 
-local github = Spore.new_from_spec 'http://github.com/SPORE/api-description/raw/master/services/github.json'
+local github = Spore.new_from_spec 'https://raw.github.com/SPORE/api-description/master/services/github.json'
 github:enable 'Format.JSON'
 github:enable('Auth.Basic', {
     username = 'schacon/token',
@@ -261,7 +261,7 @@ print(res.body.user.name)       --> Scott Chacon
 <pre class="example">
 local Spore = require 'Spore'
 
-local github = Spore.new_from_spec('http://github.com/SPORE/api-description/raw/master/services/github.json', {
+local github = Spore.new_from_spec('https://raw.github.com/SPORE/api-description/master/services/github.json', {
     base_url = "https://github.com/api/v2/",
 })
 github:enable 'Format.JSON'
@@ -277,7 +277,7 @@ print(res.body.user.name)       --> Scott Chacon
 <a href="http://guide.couchdb.org/draft/api.html">CouchDB, The Definitif Guide</a>.</p>
 
 <pre class="example">
-local base = 'http://github.com/SPORE/api-description/apps/couchdb/'
+local base = 'https://raw.github.com/SPORE/api-description/master/apps/couchdb/'
 local couchdb = require 'Spore'.new_from_spec(
     base .. 'server.json',
     base .. 'database.json',
@@ -407,7 +407,7 @@ local Spore = require 'Spore'
 --Spore.debug = io.stdout
 
 local function get_google_keys (scope, keys)
-    local oauth = require 'Spore'.new_from_spec 'https://github.com/SPORE/api-description/raw/master/services/googleoauth.json'
+    local oauth = require 'Spore'.new_from_spec 'https://raw.github.com/SPORE/api-description/master/services/googleoauth.json'
     oauth:enable('Auth.OAuth', keys)
     local r1 = oauth:get_request_token{
         scope = scope,
@@ -435,7 +435,7 @@ local function get_google_keys (scope, keys)
 end
 
 
-local client = require 'Spore'.new_from_spec 'https://github.com/SPORE/api-description/raw/master/services/googleshortener.json'
+local client = require 'Spore'.new_from_spec 'https://raw.github.com/SPORE/api-description/master/services/googleshortener.json'
 client:enable 'Format.JSON'
 client:enable('Auth.OAuth', get_google_keys('https://www.googleapis.com/auth/urlshortener', {
     oauth_consumer_key    = '000000000000.apps.googleusercontent.com',

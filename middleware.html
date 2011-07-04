@@ -52,6 +52,7 @@
         <li><a href="middleware.html#aws">Auth.AWS</a></li>
         <li><a href="middleware.html#basic">Auth.Basic</a></li>
         <li><a href="middleware.html#bearer">Auth.Bearer</a></li>
+        <li><a href="middleware.html#digest">Auth.Digest</a></li>
         <li><a href="middleware.html#oauth">Auth.OAuth</a></li>
         <li><a href="middleware.html#json">Format.JSON</a></li>
         <li><a href="middleware.html#xml">Format.XML</a></li>
@@ -134,6 +135,22 @@ client:enable('Auth.Basic', {
 <pre class="example">
 client:enable('Auth.Bearer', {
     bearer_token = 'vF9dft4qmT',
+})
+</pre>
+
+<h2><a name="digest"></a>Spore.Middleware.Auth.Digest</h2>
+
+<p>This middleware adds a header <code>authorization</code> in the request</p>
+
+<p>The <code>nonce</code> retrieved in the response to the first request is stored
+and used by all following requests.</p>
+
+<p>This middleware requires <a href="http://luacrypto.luaforge.net/">luacrypto</a>.</p>
+
+<pre class="example">
+client:enable('Auth.Digest', {
+    username = 'Mufasa',
+    password = 'Circle Of Life',
 })
 </pre>
 

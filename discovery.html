@@ -88,12 +88,16 @@
 
 <h2><a name="reference"></a>Reference</h2>
 
+<p>With this module, lua-Spore becomes a
+<a href="http://code.google.com/apis/discovery/libraries.html">Google APIs Client Library</a> for Lua.</p>
+
 <h3>Global Functions</h3>
 
 <h4><code>new_from_discovery( desc, [, { options }] )</code></h4>
 
-<p>Instanciate a ReST client from one description defined by an URL or a table with keys
-<code>api</code> and <code>version</code>.</p>
+<p>Instanciate a ReST client from a
+<a href="http://code.google.com/apis/discovery/">Google Discovery Document</a>
+defined by an URL or a table with keys <code>api</code> and <code>version</code>.</p>
 
 <p>The optional table <code>options</code> allows to overwrite some parameters of the description
 (see <code>new_from_spec</code>).</p>
@@ -110,8 +114,8 @@ local client = discovery.new_from_discovery { api = 'urlshortener', version = 'v
 
 <h4><code>convert( gdoc )</code></h4>
 
-<p>Converts a Google Discovery Document into a Spore Specification
-(both are represented by a <code>table</code>).</p>
+<p>Converts a <a href="http://code.google.com/apis/discovery/">Google Discovery Document</a>
+into a Spore Specification (both are represented by a <code>table</code>).</p>
 
 <h3>Utilities</h3>
 

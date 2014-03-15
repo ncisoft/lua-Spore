@@ -381,13 +381,14 @@ assert(r.body.ok)
 print("id", r.body.id)
 print("rev", r.body.rev)
 
+local slurp = require 'Spore.Protocols'.slurp
 local r = couchdb:add_attachment{
     db = 'albums',
     id = '6e1295ed6c29495e54cc05947f18c8af',
     rev = rev2,
     file = 'api.png',
     content_type = 'image/png',
-    payload = '@api.png',
+    payload = slurp'api.png',
 }
 assert(r.body.ok)
 print("id", r.body.id)
